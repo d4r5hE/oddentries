@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="robots" content="noindex">
+<title>Signing in - Odd Entries</title><link rel="icon" href="icon.png">
+<style>body{margin:0;background:#121318;color:#ECE6D8;font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+main{max-width:560px;margin:0 auto;padding:48px 20px}a{color:#E5383B}.dim{color:#A9A39A}</style></head>
+<body><main>
+<h2>Finishing the TikTok sign-in ...</h2>
+<p class="dim">This page hands TikTok's answer to Odd Entries Studio running on this computer
+(127.0.0.1, port 8766). Nothing is stored or sent anywhere else.</p>
+<p id="manual" hidden>If nothing happens, <a id="go" href="#">continue to the studio</a>.</p>
+<p id="none" hidden>There is nothing to hand over here: start the sign-in from the studio's Accounts page.</p>
+<script>
+  // Only the query string TikTok added (code, scopes, state, or an error) is passed on, to the studio's local
+  // listener; it checks `state` and exchanges the code with its own client secret.
+  var q = window.location.search;
+  if (/[?&](code|error)=/.test(q)) {
+    var to = "http://127.0.0.1:8766/callback" + q;
+    document.getElementById("go").href = to;
+    document.getElementById("manual").hidden = false;
+    window.location.replace(to);
+  } else {
+    document.getElementById("none").hidden = false;
+  }
+</script>
+</main></body></html>
